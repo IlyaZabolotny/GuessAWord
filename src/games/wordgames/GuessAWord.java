@@ -1,8 +1,16 @@
 package games.wordgames;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * The class presents a game where a user guesses a word through the command line interface
+ * by entering 1 letter or the whole word. If a player enters a word and it is incorrect,
+ * the user automatically lose. Vocabulary is a text file.
+ * @version 1
+ * @author Ilya Zabolotny
+ */
 public class GuessAWord {
 
     public static void main(String[] args) {
@@ -58,6 +66,11 @@ public class GuessAWord {
         }
     }
 
+    /**
+     *Chooses a random word from the vocabulary.
+     * @param vocabulary
+     * @return word from a word bank
+     */
     private static String chooseWord(String[] vocabulary) {
         String word;
         int vocabulareVolume=vocabulary.length;
@@ -65,6 +78,14 @@ public class GuessAWord {
         word = vocabulary[choice];
         return word;
     }
+
+    /**
+     * open the letter entered by the user if matches
+     * @param word
+     * @param letter
+     * @param maskWord
+     * @return word with open letters.
+     */
     private static String replaceLetter(String word, String letter, String maskWord) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
@@ -80,6 +101,12 @@ public class GuessAWord {
         return stringBuilder.toString();
     }
 
+    /**
+     * Reads words from file
+     * @param path
+     * @return a word bank
+     * @throws FileNotFoundException
+     */
     private static String[] readFromFile (String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
