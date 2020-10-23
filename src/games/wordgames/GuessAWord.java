@@ -2,11 +2,11 @@ package games.wordgames;
 import java.util.Scanner;
 
 public class GuessAWord {
-    private static final String word = "testing";
+    private static final String[] vocabulary = {"testing", "rabbit", "office", "pig", "plants", "memory", "route", "night", "range", "brake"};
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        String word=chooseWord(vocabulary);
         int wordLenght = word.length();
         StringBuilder stringBuilder = new StringBuilder();
         //masking the selected word
@@ -35,7 +35,7 @@ public class GuessAWord {
                 if (word.toLowerCase().indexOf(c) >= 0) {
                     for (int i = 0; i < word.length(); i++) {
                         if (word.charAt(i) == c) {
-                            maskWord = replaceLetter(Character.toString(c), maskWord);
+                            maskWord = replaceLetter(word, Character.toString(c), maskWord);
                         }
                     }
                     System.out.println("Trial "+numberOfTrial+": "+maskWord);
@@ -51,7 +51,14 @@ public class GuessAWord {
         }
     }
 
-    private static String replaceLetter(String letter, String maskWord) {
+    private static String chooseWord(String[] vocabulary) {
+        String word;
+        int vocabulareVolume=vocabulary.length;
+        int choice = (int)(Math.random()*vocabulareVolume);
+        word = vocabulary[choice];
+        return word;
+    }
+    private static String replaceLetter(String word, String letter, String maskWord) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == letter.charAt(0)) {
