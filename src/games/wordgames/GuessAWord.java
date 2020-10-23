@@ -1,11 +1,18 @@
 package games.wordgames;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GuessAWord {
-    private static final String[] vocabulary = {"testing", "rabbit", "office", "pig", "plants", "memory", "route", "night", "range", "brake"};
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        String[] vocabulary = null;
+        try {
+            vocabulary = readFromFile("Vocabulary.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         String word=chooseWord(vocabulary);
         int wordLenght = word.length();
         StringBuilder stringBuilder = new StringBuilder();
@@ -71,6 +78,14 @@ public class GuessAWord {
             }
         }
         return stringBuilder.toString();
+    }
+
+    private static String[] readFromFile (String path) throws FileNotFoundException {
+        File file = new File(path);
+        Scanner scanner = new Scanner(file);
+        String line = scanner.nextLine();
+        String [] vocabulary = line.split(" ");
+        return vocabulary;
     }
 
 }
